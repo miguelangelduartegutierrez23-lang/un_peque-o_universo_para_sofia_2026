@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="scopeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+  </defs>
+  <!-- Optical tube (pointed diagonally upward-right) -->
+  <path d="M28 66 L68 26 L76 34 L36 74 Z" fill="url(#scopeGrad)" stroke="#c4b5fd" stroke-width="1.5"/>
+  <!-- Front lens hood -->
+  <ellipse cx="72" cy="30" rx="6" ry="8" fill="#38bdf8" stroke="#ffffff" stroke-width="1.2" transform="rotate(-45 72 30)"/>
+  <!-- Eyepiece / Finder -->
+  <rect x="22" y="70" width="8" height="6" rx="2" fill="#94a3b8" transform="rotate(-45 26 73)"/>
+  <rect x="42" y="36" width="16" height="5" rx="1.5" fill="#c084fc" transform="rotate(-45 50 38)"/>
+  <!-- Mount & Tripod -->
+  <circle cx="44" cy="58" r="4.5" fill="#f1f5f9"/>
+  <line x1="44" y1="58" x2="22" y2="90" stroke="#cbd5e1" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="44" y1="58" x2="44" y2="92" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="44" y1="58" x2="64" y2="90" stroke="#cbd5e1" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Sparkles observed in deep sky -->
+  <circle cx="84" cy="18" r="2" fill="#fef08a"/>
+  <circle cx="92" cy="24" r="1.5" fill="#67e8f9"/>
+</svg>

@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090715">
+  <meta name="description" content="Sofi · Un pequeño universo digital interactivo con música lofi, juegos astronómicos, curiosidades y secretos espaciales.">
+  <title>Sofi ✦ Un pequeño universo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5.5">
+</head>
+<body>
+  <!-- Ambient Cosmic Background -->
+  <div class="ambient-nebula" aria-hidden="true"></div>
+  <canvas id="starCanvas" class="star-canvas" aria-hidden="true"></canvas>
+
+  <!-- Interactive Cosmic Cursor Halo -->
+  <div class="cosmic-cursor-follower" id="cosmicCursorFollower" aria-hidden="true">
+    <div class="cursor-ring"></div>
+    <div class="cursor-dot"></div>
+  </div>
+
+  <!-- Sticky Top Navigation -->
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Ir al inicio de la expedición">
+      <span class="brand-sparkle">✦</span>
+      <span class="brand-text">UN PEQUEÑO UNIVERSO</span>
+    </a>
+    <div class="top-actions">
+      <button class="secret-tracker-btn" id="secretTracker" title="Destellos estelares ocultos">
+        <span class="tracker-star">✦</span>
+        <span id="secretCount">0</span>/3 <span class="tracker-label">secretas</span>
+      </button>
+      <button class="icon-button" id="motionToggle" aria-pressed="false" title="Reducir animaciones" aria-label="Reducir animaciones">
+        ✧
+      </button>
+      <button class="icon-button" id="soundToggle" aria-pressed="false" title="Música / Ambiente sonoro" aria-label="Control de música">
+        ♫
+      </button>
+      <button class="icon-button" id="themeToggle" aria-pressed="false" title="Cambiar matiz ambiental" aria-label="Cambiar matiz de ambiente">
+        ☾
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="pulse-dot"></span> SECTOR 00 · BIENVENIDA A BORDO
+        </div>
+        <h1>Hola, <span class="glow-name">Sofi</span><i class="hero-star" id="heroStar">✦</i></h1>
+        <p class="hero-subtitle">
+          Dicen que hay personas con su propia gravedad.<br>
+          Este pequeño rincón lo programé especialmente para ti.
+        </p>
+        <p class="hero-note">
+          Una mezcla de música relajante, curiosidades del espacio y un par de juegos para pasar el rato. Sin prisa ni compromisos: explora a tu propio ritmo.
+        </p>
+        <div class="hero-actions">
+          <button class="primary-button" id="beginBtn">
+            Iniciar expedición <span class="btn-arrow">↗</span>
+          </button>
+          <button class="secondary-button" id="gotoMusicBtn">
+            Sintonizar música <span class="btn-note">♫</span>
+          </button>
+        </div>
+        <div class="hero-foot">
+          <span class="mini-orbit">◎</span> HECHO CON CÓDIGO, CURIOSIDAD Y BUENA ONDA
+        </div>
+      </div>
+
+      <div class="planet-scene" aria-label="Planeta cósmico con atmósfera y anillos">
+        <div class="planet-glow-halo"></div>
+        <div class="orbit-ring orbit-ring-back"></div>
+        <div class="planet-body">
+          <div class="planet-texture"></div>
+          <div class="planet-terminator"></div>
+          <div class="planet-atmosphere"></div>
+        </div>
+        <div class="orbit-ring orbit-ring-front"></div>
+        <!-- Orbiting Satellite Moon -->
+        <div class="satellite-orbit">
+          <div class="satellite-dot" title="Sonda de exploración"></div>
+        </div>
+        <!-- Secret Star 1 Hidden in Orbit -->
+        <button class="hidden-star star-orbit" id="star1" type="button" aria-label="Destello secreto 1: en la órbita de bienvenida" title="✦ ¡Un destello oculto!">✦</button>
+        
+        <div class="planet-caption">
+          <span class="caption-dot"></span> COORDENADAS 04°N · SISTEMA ESTELAR
+        </div>
+      </div>
+
+      <a class="scroll-hint" href="#map" aria-label="Deslizar hacia el mapa estelar">
+        <span class="mouse-icon"></span> DESLIZA PARA NAVEGAR
+      </a>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="section map-section" id="map">
+      <div class="section-heading">
+        <p class="eyebrow">TU RUTA, TUS REGLAS</p>
+        <h2>El mapa de <em>constelaciones</em></h2>
+        <p>Toca una estrella para descender a ese sector. No hay un orden obligatorio para recorrer el cosmos.</p>
+      </div>
+
+      <div class="constellation-wrap">
+        <svg class="constellation-lines" viewBox="0 0 760 380" preserveAspectRatio="none" aria-hidden="true">
+          <path id="constellationPath" d="M100 130 L250 75 L430 160 L580 95 L660 210 M250 75 L210 280 L430 160 L490 305 L660 210 M580 95 L590 310 L490 305"/>
+        </svg>
+
+        <button class="star-node node-one" data-open="discover" aria-label="Sector 1: Archivos del Cosmos">
+          <span class="node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-mini"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18"/><path d="M12 8v8"/></svg>
+          </span>
+          <span class="node-label">Archivos del Cosmos</span>
+          <small>SECTOR 01</small>
+        </button>
+
+        <button class="star-node node-two" data-open="music" aria-label="Sector 2: Órbita Sonora">
+          <span class="node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-mini"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </span>
+          <span class="node-label">Órbita Sonora</span>
+          <small>SECTOR 02</small>
+        </button>
+
+        <button class="star-node node-three" data-open="games" aria-label="Sector 3: Desafíos Espaciales">
+          <span class="node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-mini"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </span>
+          <span class="node-label">Desafíos Cósmicos</span>
+          <small>SECTOR 03</small>
+        </button>
+
+        <button class="star-node node-four" data-open="oracle" aria-label="Sector 4: Sintonizador Estelar">
+          <span class="node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-mini"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3m-3.5-6.5l-2.1 2.1m-8.8 8.8l-2.1 2.1m0-13l2.1 2.1m8.8 8.8l2.1 2.1"/></svg>
+          </span>
+          <span class="node-label">Sintonizador Estelar</span>
+          <small>SECTOR 04</small>
+        </button>
+
+        <button class="star-node node-five" data-open="secrets" aria-label="Sector 5: El Telescopio Secreto">
+          <span class="node-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-mini"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </span>
+          <span class="node-label">El Telescopio Secreto</span>
+          <small>SECTOR 05</small>
+        </button>
+      </div>
+
+      <div class="progress-row">
+        <span id="progressText">0 de 5 sectores explorados</span>
+        <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <span id="progressBar"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTOR 01: ARCHIVOS DEL COSMOS -->
+    <section class="section content-section" id="discover">
+      <div class="section-heading left">
+        <p class="eyebrow">SECTOR 01 · REGISTROS ESTELARES</p>
+        <h2>Archivos del <em>Cosmos</em></h2>
+        <p>Curiosidades astronómicas reales y pequeños apuntes para mirar con calma.</p>
+      </div>
+
+      <div class="card-grid">
+        <article class="glass-card feature-card">
+          <div class="card-art">
+            <img src="assets/illustrations/gravity.svg" alt="Atracción gravitacional entre dos cuerpos celestes" loading="lazy">
+          </div>
+          <p class="card-kicker">FENÓMENO FÍSICO · COINCIDENCIAS</p>
+          <h3>Coincidencias en la Órbita</h3>
+          <p>En el cosmos, dos cuerpos celestes con trayectorias distintas a veces vuelven a cruzarse en el mismo cuadrante. Retomar contacto y notar que hay buena onda es algo que vale la pena explorar.</p>
+          <button class="text-button reveal-btn" data-modal-title="La física de reencontrarse" data-message="Dicen que el universo es infinito, pero coincidir de nuevo con alguien después de un tiempo y notar que la charla fluye suave... eso no pasa todos los días. Buena energía ante todo.">
+            Leer apunte <span>↗</span>
+          </button>
+        </article>
+
+        <article class="glass-card feature-card">
+          <div class="card-art">
+            <img src="assets/illustrations/aurora.svg" alt="Destellos espontáneos en el vacío" loading="lazy">
+          </div>
+          <p class="card-kicker">RADAR ESTELAR · LO ESPONTÁNEO</p>
+          <h3>Destellos Espontáneos</h3>
+          <p>Las mejores sorpresas en el cosmos ocurren sin libreto. A veces basta una conversación sincera y espontánea para que dos personas empiecen a conocerse con una vibra diferente.</p>
+          <button class="text-button reveal-btn" data-modal-title="Sin libretos ni complicaciones" data-message="No todo tiene que planearse con meses de anticipación. Las conexiones más bacanas casi siempre empiezan de la forma más sencilla: siendo uno mismo, charlando relajado y dejando que la curiosidad haga el resto.">
+            Leer apunte <span>↗</span>
+          </button>
+        </article>
+
+        <article class="glass-card feature-card">
+          <div class="card-art">
+            <img src="assets/illustrations/orbital-pause.svg" alt="Pausa estelar sin prisas" loading="lazy">
+          </div>
+          <p class="card-kicker">PAUSA EN ÓRBITA · SIN AFANES</p>
+          <h3>Cero Gravedad, Cero Presión</h3>
+          <p>A las galaxias nadie les pone afán ni fecha límite. Conocernos con calma, charlar sin expectativas raras y reírnos un rato es la única ruta que de verdad tiene sentido.</p>
+          <button class="text-button reveal-btn" data-modal-title="Viajar ligeros de equipaje" data-message="No hay contratos cósmicos ni exámenes por pasar. Me caes muy bien, me pareces una chica genial y la idea es simplemente conocernos poco a poco, al ritmo que se sienta natural para ambos.">
+            Leer apunte <span>↗</span>
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN INTERACTIVA 1: ESTRELLA CON MENSAJE PERSONALIZADO -->
+    <section class="section custom-star-section" id="customStarSection">
+      <div class="section-heading">
+        <p class="eyebrow">SEÑAL DIRECTA · MENSAJE PERSONALIZADO</p>
+        <h2>Una estrella con <em>tu frecuencia</em></h2>
+        <p>En medio de toda la inmensidad del espacio, hay una estrella que guarda un apunte especial. Toca para sintonizar su luz.</p>
+      </div>
+
+      <div class="star-interactive-stage glass-card">
+        <div class="star-halo-effect">
+          <div class="halo-ring h-1"></div>
+          <div class="halo-ring h-2"></div>
+          <div class="halo-ring h-3"></div>
+          <button class="pulse-custom-star" id="customStarBtn" aria-label="Tocar estrella con mensaje personalizado" type="button">
+            <span class="custom-star-glow"></span>
+            <span class="custom-star-icon">✦</span>
+          </button>
+        </div>
+        <p class="star-hint-label">Toca la estrella para leer su mensaje</p>
+
+        <!-- Message Reveal Container -->
+        <div class="custom-star-dialog hidden" id="customStarDialog" role="region" aria-live="polite">
+          <div class="dialog-sparkle-badge">✦ MENSAJE REVELADO</div>
+          <blockquote class="custom-star-quote" id="customStarQuote">
+            «Hay personas que despiertan curiosidad sin hacer demasiado ruido. Tú eres un poquito así ✦»
+          </blockquote>
+          <p class="custom-star-subtext" id="customStarSub">Una señal sincera y sin misterios en este pequeño rincón del cosmos.</p>
+          <div class="custom-star-actions">
+            <button class="secondary-button" id="customStarAgainBtn" type="button">Tocar de nuevo ✧</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTOR 02: LA ÓRBITA SONORA -->
+    <section class="section music-section" id="music">
+      <div class="section-heading left">
+        <p class="eyebrow">SECTOR 02 · FRECUENCIAS AUDITIVAS</p>
+        <h2>La órbita <em>sonora</em></h2>
+        <p>Música relajante instrumental y paisajes sonoros espaciales para acompañar tu viaje.</p>
+      </div>
+
+      <div class="music-player glass-card">
+        <!-- Vinyl Art with rotating disc -->
+        <div class="album-art-wrap">
+          <div class="album-vinyl" id="albumVinyl">
+            <div class="vinyl-grooves"></div>
+            <div class="vinyl-center">
+              <span class="vinyl-star">✦</span>
+              <span class="vinyl-label" id="vinylGenreLabel">LO-FI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="player-info">
+          <div class="player-header">
+            <div class="player-badges">
+              <span class="track-badge" id="trackBadge">PISTA 1 / 3</span>
+              <span class="card-kicker-inline">CANAL EN DIRECTO</span>
+            </div>
+            <!-- Secret Star 2 Hidden in music player -->
+            <button class="hidden-star star-player" id="star2" type="button" aria-label="Destello secreto 2: en la cabina sonora" title="✦ ¡Segundo destello!">✦</button>
+          </div>
+          <h3 id="trackTitle">Cosmic Lofi · Ondas de Medianoche</h3>
+          <p id="trackArtist">Pista 01 · Acordes cálidos & campanadas estelares</p>
+
+          <div class="player-controls">
+            <button class="round-control" id="prevTrack" aria-label="Pista anterior" title="Pista anterior">↶</button>
+            <button class="play-control" id="playTrack" aria-label="Reproducir o pausar música">
+              <span id="playIcon">▶</span>
+            </button>
+            <button class="round-control" id="nextTrack" aria-label="Siguiente pista" title="Siguiente pista">↷</button>
+          </div>
+
+          <!-- Interactive Seekbar -->
+          <div class="track-progress-container" id="progressContainer" role="slider" aria-label="Posición de reproducción" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+            <div class="track-progress-bar" id="trackProgressBar"></div>
+          </div>
+
+          <div class="player-foot">
+            <span id="playStatus">Audio listo para reproducir</span>
+            <span id="trackTime">00:00 / 00:28</span>
+          </div>
+
+          <!-- Mensaje lindo, tierno y parchado de cada pista -->
+          <div class="track-vibe-card" id="trackVibeCard">
+            <span class="vibe-icon">✦</span>
+            <p id="trackVibeText">Para bajar revoluciones. A veces el día se pone denso, pero poner una buena música de fondo y charlar con alguien que te alegra el rato hace que todo se sienta más liviano. Cero estrés.</p>
+          </div>
+
+          <!-- Extras: Volume & Ambient Solar Wind Capsule -->
+          <div class="player-extras">
+            <div class="volume-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="svg-vol" style="width:16px;height:16px;min-width:16px;max-width:16px;display:block;" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" aria-label="Control de volumen">
+            </div>
+
+            <button class="synth-capsule-btn" id="synthToggle" type="button" aria-pressed="false" title="Alternar atmósfera de viento cósmico">
+              <span class="synth-led"></span>
+              <span class="synth-title">Viento Cósmico</span>
+              <span class="synth-tag" id="synthStateText">OFF</span>
+            </button>
+          </div>
+
+          <div class="player-footer-bar">
+            <div class="nav-hint-pill">
+              <span class="hint-badge">↶ / ↷</span>
+              <span>Cambia entre las 3 canciones</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <audio id="audioPlayer" src="assets/audio/cosmic-lofi.wav" preload="metadata"></audio>
+    </section>
+
+    <!-- SECCIÓN INTERACTIVA 2: EL RINCÓN DE LOS PEQUEÑOS DETALLES -->
+    <section class="section small-details-section" id="smallDetailsSection">
+      <div class="section-heading">
+        <h2>El rincón de los <em>pequeños detalles</em></h2>
+        <p>Apuntes sencillos, buena energía y cero complicaciones. Solo pequeñas cosas para sacarte una sonrisa cuando pases por aquí.</p>
+      </div>
+
+      <div class="details-grid">
+        <article class="detail-card glass-card" tabindex="0">
+          <div class="detail-header">
+            <span class="detail-icon">☕</span>
+            <span class="detail-badge">PAUSA OBLIGATORIA</span>
+          </div>
+          <h3>La magia del café</h3>
+          <p>Si el día se pone denso o la rutina aburre, un café bien caliente (o un buen té) y cinco minutos de desconexión hacen milagros instantáneos.</p>
+          <div class="detail-footer">
+            <span class="detail-status">✦ Cero estrés</span>
+          </div>
+        </article>
+
+        <article class="detail-card glass-card" tabindex="0">
+          <div class="detail-header">
+            <span class="detail-icon">🎧</span>
+            <span class="detail-badge">EN AURICULARES</span>
+          </div>
+          <h3>Música sin afán</h3>
+          <p>Que nunca te falte esa canción favorita que te sube el ánimo en el camino. Hay melodías que tienen la gravedad exacta para salvar cualquier tarde.</p>
+          <div class="detail-footer">
+            <span class="detail-status">✦ Buena frecuencia</span>
+          </div>
+        </article>
+
+        <article class="detail-card glass-card" tabindex="0">
+          <div class="detail-header">
+            <span class="detail-icon">✨</span>
+            <span class="detail-badge">AUTENTICIDAD</span>
+          </div>
+          <h3>Tu propio estilo</h3>
+          <p>Qué bacano es conocer a alguien que tiene su propio mundo y sus propios gustos sin fingir poses. Eso vale oro en cualquier galaxia.</p>
+          <div class="detail-footer">
+            <span class="detail-status">✦ Brillo natural</span>
+          </div>
+        </article>
+
+        <article class="detail-card glass-card" tabindex="0">
+          <div class="detail-header">
+            <span class="detail-icon">😄</span>
+            <span class="detail-badge">ANTÍDOTO</span>
+          </div>
+          <h3>Risas espontáneas</h3>
+          <p>De esas risas compartidas sin libreto, donde uno se ríe de cualquier bobada. Reírse mucho y con ganas siempre será el mejor plan.</p>
+          <div class="detail-footer">
+            <span class="detail-status">✦ 100% genuino</span>
+          </div>
+        </article>
+
+        <article class="detail-card glass-card" tabindex="0">
+          <div class="detail-header">
+            <span class="detail-icon">🪐</span>
+            <span class="detail-badge">PASO A PASO</span>
+          </div>
+          <h3>Cero expectativas raras</h3>
+          <p>Sin manuales complicados ni afanes. Los parches más chéveres siempre empiezan así: charlando tranqui, conociéndose y pasando un buen rato.</p>
+          <div class="detail-footer">
+            <span class="detail-status">✦ Buena onda</span>
+          </div>
+        </article>
+
+        <article class="detail-card glass-card" tabindex="0">
+          <div class="detail-header">
+            <span class="detail-icon">✦</span>
+            <span class="detail-badge">RECORDATORIO</span>
+          </div>
+          <h3>Días ligeros</h3>
+          <p>No todos los días tienen que ser épicos. A veces los mejores son esos tranquilos donde todo fluye sin enredos y te vas a dormir en paz.</p>
+          <div class="detail-footer">
+            <span class="detail-status">✦ Calma cósmica</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTOR 03: DESAFÍOS ESPACIALES -->
+    <section class="section games-section" id="games">
+      <div class="section-heading">
+        <p class="eyebrow">SECTOR 03 · ENTRENAMIENTO ESTELAR</p>
+        <h2>Desafíos <em>cósmicos</em></h2>
+        <p>Dos pruebas para medir tu conocimiento astronómico y tu memoria visual.</p>
+      </div>
+
+      <!-- GAME 1: TRIVIA -->
+      <div class="quiz-container glass-card" id="quizCard">
+        <div class="quiz-top">
+          <span class="quiz-badge">MINIJUEGO 01 · TRIVIA ESPACIAL</span>
+          <span id="quizCounter">PREGUNTA 1 / 4</span>
+          <span class="quiz-score" id="quizScore">Aciertos: 0</span>
+        </div>
+
+        <div class="quiz-symbol">✧</div>
+        <h3 id="quizQuestion">Cargando desafío estelar...</h3>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p class="quiz-feedback" id="quizFeedback" aria-live="polite">Selecciona una respuesta para continuar.</p>
+        <button class="primary-button hidden" id="nextQuestion">Siguiente pregunta ↗</button>
+      </div>
+
+      <!-- GAME 2: MEMORAMA 3D -->
+      <div class="memory-container glass-card" id="memorySection">
+        <div class="memory-header">
+          <div>
+            <p class="card-kicker">MINIJUEGO 02 · RECONOCIMIENTO VISUAL</p>
+            <h3>Memoria <em>Estelar 3D</em></h3>
+            <p class="memory-sub">Encuentra las 6 parejas de elementos cósmicos. Toca cada carta para girarla en 3D.</p>
+          </div>
+          <div class="memory-stats">
+            <div class="stat-pill"><span id="memoryStatus">0 / 6 parejas</span></div>
+            <div class="stat-pill">Intentos: <span id="memoryMoves">0</span></div>
+            <button class="secondary-button" id="resetMemory">Reiniciar tablero</button>
+          </div>
+        </div>
+
+        <div class="memory-board" id="memoryBoard" aria-label="Tablero de memoria cósmica">
+          <!-- Dynamically filled with 12 3D flip cards -->
+        </div>
+
+        <div class="pair-match-toast hidden" id="pairMatchToast" aria-live="polite"></div>
+
+        <div class="memory-victory-message hidden" id="memoryVictory">
+          ✦ ¡Excelente memoria! Has sincronizado todas las constelaciones en <span id="victoryMoves">0</span> movimientos.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN INTERACTIVA 3: UN PLANETA CON PERSONALIDAD -->
+    <section class="section planet-buddy-section" id="planetBuddySection">
+      <div class="section-heading">
+        <p class="eyebrow">VIDA INTELIGENTE (O CASI) · INTERACCIÓN ORBITAL</p>
+        <h2>Un planeta con <em>personalidad</em></h2>
+        <p>Un pequeño cuerpo celeste con mucho carácter. Tócale la órbita para ver qué piensa hoy.</p>
+      </div>
+
+      <div class="planet-buddy-stage glass-card">
+        <div class="planet-buddy-character">
+          <!-- Interactive Character Planet SVG -->
+          <div class="buddy-avatar-wrap" id="planetBuddyAvatar" role="button" tabindex="0" aria-label="Tocar planeta para cambiar su expresión">
+            <svg class="buddy-svg" viewBox="0 0 200 200" width="180" height="180" aria-hidden="true">
+              <defs>
+                <radialGradient id="buddyGrad" cx="40%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#a78bfa" />
+                  <stop offset="60%" stop-color="#6366f1" />
+                  <stop offset="100%" stop-color="#312e81" />
+                </radialGradient>
+                <linearGradient id="buddyRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f472b6" stop-opacity="0.9" />
+                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.4" />
+                </linearGradient>
+              </defs>
+              <!-- Back ring -->
+              <ellipse cx="100" cy="100" rx="90" ry="24" fill="none" stroke="url(#buddyRingGrad)" stroke-width="8" stroke-dasharray="140 10 30 10" transform="rotate(-20 100 100)" opacity="0.6"/>
+              <!-- Planet body sphere -->
+              <circle cx="100" cy="100" r="64" fill="url(#buddyGrad)" />
+              <!-- Highlight sphere -->
+              <circle cx="82" cy="78" r="48" fill="#ffffff" opacity="0.12" />
+              <!-- Cheeks (blush) -->
+              <circle cx="68" cy="115" r="7" fill="#f472b6" opacity="0.55" id="buddyCheekLeft"/>
+              <circle cx="132" cy="115" r="7" fill="#f472b6" opacity="0.55" id="buddyCheekRight"/>
+              <!-- Eyes Group -->
+              <g id="buddyEyes">
+                <!-- Eye Left -->
+                <circle cx="76" cy="98" r="6" fill="#ffffff" />
+                <circle cx="78" cy="96" r="2.5" fill="#1e1b4b" />
+                <!-- Eye Right -->
+                <circle cx="124" cy="98" r="6" fill="#ffffff" />
+                <circle cx="126" cy="96" r="2.5" fill="#1e1b4b" />
+              </g>
+              <!-- Mouth Group -->
+              <g id="buddyMouth">
+                <path d="M 90 114 Q 100 124 110 114" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+              </g>
+              <!-- Front ring -->
+              <path d="M 16 130 A 90 24 0 0 0 184 70" fill="none" stroke="url(#buddyRingGrad)" stroke-width="8" transform="rotate(-20 100 100)"/>
+              <!-- Little antenna sparkle -->
+              <circle cx="100" cy="28" r="4" fill="#38bdf8" />
+              <line x1="100" y1="36" x2="100" y2="28" stroke="#38bdf8" stroke-width="2"/>
+            </svg>
+            <div class="buddy-mood-tag" id="buddyMoodTag">Estado: Curioso ✧</div>
+          </div>
+        </div>
+
+        <div class="planet-buddy-dialogue">
+          <div class="buddy-bubble">
+            <span class="buddy-speaker">PLANETA «ÓRBITA-7» DICE:</span>
+            <p class="buddy-text" id="planetSpeechText">
+              «Bienvenida, visitante. No garantizamos que encuentres vida inteligente por aquí, pero al menos hay buena vibra.»
+            </p>
+          </div>
+          <div class="buddy-controls">
+            <button class="primary-button" id="pokePlanetBtn" type="button">
+              Tocar al planeta <span>👉🪐</span>
+            </button>
+            <span class="buddy-counter-hint">Expresiones descubiertas: <span id="buddyExpCount">1</span>/5</span>
+          </div>
+          <div class="buddy-secret-note" id="buddySecretNote">
+            <span class="secret-shh">🤫</span>
+            <span id="buddySecretText"><strong>Aviso orbital secreto:</strong> ¡No me des más de 4 clics seguidos! 😜🤣</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTOR 04: EL SINTONIZADOR ESTELAR -->
+    <section class="section oracle-section" id="oracle">
+      <div class="section-heading">
+        <p class="eyebrow">SECTOR 04 · TRANSMISIÓN DIARIA</p>
+        <h2>El Sintonizador <em>Estelar</em></h2>
+        <p>Un dial cósmico que emite pensamientos aleatorios: mezcla de curiosidad, buen humor y una dosis de buena energía.</p>
+      </div>
+
+      <div class="oracle-card glass-card">
+        <!-- Interactive Glowing Resonator Sphere -->
+        <div class="resonator-wrap">
+          <div class="resonator-sphere" id="resonatorSphere">
+            <div class="resonator-ring r-one"></div>
+            <div class="resonator-ring r-two"></div>
+            <div class="resonator-core">✦</div>
+          </div>
+          <!-- Secret Star 3 Hidden on the resonator base -->
+          <button class="hidden-star star-dial" id="star3" type="button" aria-label="Destello secreto 3: en el dial del sintonizador" title="✦ ¡Tercer destello!">✦</button>
+        </div>
+
+        <div class="oracle-body">
+          <div class="frequency-indicator">
+            <span class="freq-dot"></span> SINTONIZADOR FM CÓSMICA · <span id="freqDisplay">104.7 MHz</span>
+          </div>
+          <h3 id="oracleTitle">¿Qué dice la frecuencia de hoy?</h3>
+          <div class="oracle-message-box" id="oracleMessageBox">
+            <p id="oracleText">Toca el botón para buscar una frecuencia estelar y descubrir el mensaje del día.</p>
+          </div>
+          <button class="primary-button" id="tuneBtn">
+            Sintonizar frecuencia <span>✧</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN INTERACTIVA 4: CONSTELACIÓN DE BUENOS DESEOS -->
+    <section class="section wishes-section" id="wishesSection">
+      <div class="section-heading">
+        <p class="eyebrow">ENERGÍA POSITIVA · SEÑAL SINCERA</p>
+        <h2>Constelación de <em>buenos deseos</em></h2>
+        <p>Cinco estrellas interconectadas en el firmamento. Toca cada una para encender su luz y descubrir un deseo sencillo para ti.</p>
+      </div>
+
+      <div class="wishes-board glass-card">
+        <!-- Interactive Constellation Star Map -->
+        <div class="wishes-constellation-map">
+          <svg class="wishes-svg-lines" viewBox="0 0 500 240" preserveAspectRatio="none" aria-hidden="true">
+            <polyline id="wishesPolyline" points="60,150 150,70 250,140 350,60 440,130" fill="none" stroke="rgba(167, 139, 250, 0.35)" stroke-width="2" stroke-dasharray="4 4" />
+          </svg>
+
+          <!-- The 5 Star Buttons -->
+          <div class="wishes-stars-container">
+            <button class="wish-star-node s-1 active" data-wish-index="0" type="button" aria-label="Estrella 1: Que tengas un buen día">
+              <span class="star-pin">✦</span>
+              <span class="star-number">1</span>
+            </button>
+            <button class="wish-star-node s-2" data-wish-index="1" type="button" aria-label="Estrella 2: Que te rías mucho">
+              <span class="star-pin">✦</span>
+              <span class="star-number">2</span>
+            </button>
+            <button class="wish-star-node s-3" data-wish-index="2" type="button" aria-label="Estrella 3: Que descanses de verdad">
+              <span class="star-pin">✦</span>
+              <span class="star-number">3</span>
+            </button>
+            <button class="wish-star-node s-4" data-wish-index="3" type="button" aria-label="Estrella 4: Que te salga bien lo importante">
+              <span class="star-pin">✦</span>
+              <span class="star-number">4</span>
+            </button>
+            <button class="wish-star-node s-5" data-wish-index="4" type="button" aria-label="Estrella 5: Que disfrutes el camino">
+              <span class="star-pin">✦</span>
+              <span class="star-number">5</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Wish Message Card -->
+        <div class="wish-display-card" id="wishDisplayCard">
+          <div class="wish-badge" id="wishBadge">ESTRELLA 1 DE 5 · BUEN DÍA</div>
+          <h3 class="wish-title" id="wishTitle">Que tengas un gran día</h3>
+          <p class="wish-text" id="wishText">
+            Que lo que hoy tengas que hacer fluya fácil, sin enredos raros y con buena energía de principio a fin.
+          </p>
+        </div>
+
+        <!-- Progress and Completion Banner -->
+        <div class="wishes-status-bar">
+          <span class="wishes-count" id="wishesCount">Estrellas encendidas: 1 de 5</span>
+          <div class="wishes-completion hidden" id="wishesCompletion">
+            ✨ ¡Constelación completa! Que todos estos deseos te acompañen hoy y siempre.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTOR 05: EL TELESCOPIO SECRETO -->
+    <section class="section secrets-section" id="secrets">
+      <div class="section-heading">
+        <p class="eyebrow">SECTOR 05 · ZONA OCULTA</p>
+        <h2>El Telescopio <em>Secreto</em></h2>
+        <p>Un visor de espacio profundo reservado para quienes prestan atención a los pequeños detalles.</p>
+      </div>
+
+      <div class="secret-panel glass-card" id="secretPanel">
+        <!-- Locked State -->
+        <div id="secretLockedState">
+          <div class="secret-lock-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="svg-lock" style="width:48px;height:48px;max-width:48px;max-height:48px;display:inline-block;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Lente del telescopio bloqueado</h3>
+          <p>
+            Hay <strong>3 destellos estelares dorados</strong> ocultos en diferentes rincones de esta página.<br>
+            Actualmente has encontrado: <strong id="lockedCountText">0 de 3</strong>.
+          </p>
+          <div class="secret-buttons">
+            <button class="secondary-button" id="secretHintBtn" type="button">Pedir una pista estelar</button>
+            <button class="text-button" id="secretOverrideBtn" type="button">Revelar de todos modos ↗</button>
+          </div>
+          <div class="hint-box hidden" id="secretHintBox">
+            <p class="hint-text" id="secretHintText">
+              Pistas: 1) Mira la órbita del planeta en la portada. 2) Revisa la cabina del reproductor musical. 3) Observa la base del sintonizador estelar.
+            </p>
+            <button class="text-button hint-extra-btn" id="secretExtraHintBtn" type="button">
+              ¿Quieres otra pista más detallada? ✧
+            </button>
+            <div class="hint-detail-card hidden" id="secretDetailHint">
+              <span class="detail-badge">PISTA DETALLADA</span>
+              <p>
+                Busca <strong>3 pequeñas estrellas doradas (✦)</strong> que parpadean escondidas en los rincones de la página:<br>
+                <strong>1.</strong> Flotando alrededor del planeta grande en la bienvenida.<br>
+                <strong>2.</strong> Cerca del disco de vinilo en la sección de música.<br>
+                <strong>3.</strong> En la base de la esfera brillante del sintonizador.<br>
+                <em>(Al tocarlas con el dedo o el ratón, se encienden y calibran el telescopio).</em>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unlocked State (Revealed when 3 stars found or override clicked) -->
+        <div id="secretUnlockedState" class="hidden">
+          <div class="unlocked-badge">✦ ¡TELESCOPIO CALIBRADO AL 100%! ✦</div>
+          <div class="secret-constellation-img">
+            <img src="assets/illustrations/secret-constellation.svg" alt="Constelación especial descubierta" loading="lazy">
+          </div>
+          <div class="letter-wrapper" id="letterWrapper">
+            <div class="letter-header-row">
+              <span class="letter-kicker">✦ TRANSMISIÓN EXCLUSIVA ✦</span>
+              <button class="text-button typewriter-skip-btn" id="skipLetterBtn" type="button" title="Mostrar el mensaje completo de inmediato">Mostrar todo ⚡</button>
+            </div>
+            <div class="dedication-letter" id="dedicationLetterBox">
+              <div id="letterTypedContent"></div>
+              <p class="dedication-signature hidden" id="letterSignatureEl">
+                — Con aprecio y una sonrisa,<br>
+                <strong>Miguel Ángel ✦</strong>
+              </p>
+            </div>
+            <div class="letter-controls">
+              <button class="secondary-button hidden" id="closeLetterBtn" type="button">
+                Cerrar carta ✕
+              </button>
+              <button class="text-button hidden" id="replayLetterBtn" type="button">
+                Volver a escribir ✍️
+              </button>
+            </div>
+          </div>
+
+          <div class="letter-closed-card hidden" id="letterClosedCard">
+            <p>✦ El telescopio sigue calibrado y el mensaje está a salvo.</p>
+            <button class="primary-button" id="reopenLetterBtn" type="button">
+              Abrir carta nuevamente 📜
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENDING SECTION -->
+    <section class="section ending-section" id="ending">
+      <div class="ending-star">✦</div>
+      <p class="eyebrow">FIN DE LA EXPEDICIÓN</p>
+      <h2>Gracias por explorar<br><em>este pequeño universo.</em></h2>
+      <p>Espero que este rincón te haya sacado al menos una sonrisa en el camino.</p>
+
+      <div class="ending-actions">
+        <button class="primary-button" id="wishStarBtn">
+          Lanzar un deseo al cosmos <span>★</span>
+        </button>
+        <button class="secondary-button" id="backToTopBtn">
+          Volver al inicio de la ruta ↗
+        </button>
+      </div>
+
+      <p class="wish-feedback hidden" id="wishFeedback" aria-live="polite">
+        ✦ Tu estrella se ha elevado hacia la galaxia. Que tengas un día increíble.
+      </p>
+
+      <p class="signature">
+        DISEÑADO & PROGRAMADO POR MIGUEL ÁNGEL <span>✦</span> 2026
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>SOFI ✦ UN PEQUEÑO UNIVERSO</span>
+    <span>HECHO CON CÓDIGO, BUENA ONDA Y CERO COMPLICACIONES ✦</span>
+  </footer>
+
+  <!-- Universal Accessible Modal Backdrop -->
+  <div class="modal-backdrop hidden" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal glass-card">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar ventana">×</button>
+      <div class="modal-symbol" id="modalSymbol">✧</div>
+      <p class="eyebrow" id="modalCategory">APUNTE ESTELAR</p>
+      <h2 id="modalTitle">Un descubrimiento</h2>
+      <p id="modalText">Mensaje del cosmos.</p>
+      <button class="primary-button" id="modalOkay">Seguir explorando</button>
+    </div>
+  </div>
+
+  <script src="app.js?v=5.5"></script>
+</body>
+</html>

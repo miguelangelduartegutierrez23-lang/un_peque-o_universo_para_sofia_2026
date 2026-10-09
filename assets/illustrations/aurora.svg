@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" fill="none">
+  <defs>
+    <linearGradient id="auroraGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="auroraGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#818cf8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0.6"/>
+    </linearGradient>
+    <filter id="auroraBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+    </filter>
+  </defs>
+
+  <!-- Deep space background glow -->
+  <circle cx="160" cy="90" r="80" fill="#311042" opacity="0.45" filter="url(#auroraBlur)"/>
+  
+  <!-- Aurora Waves -->
+  <path d="M20 130 C70 60 120 150 170 90 C220 30 270 110 300 70 L300 120 C260 160 210 90 160 140 C110 190 60 110 20 160 Z" fill="url(#auroraGrad1)" filter="url(#auroraBlur)" opacity="0.75"/>
+  <path d="M10 90 C60 140 130 50 180 120 C230 180 270 90 310 110 L310 80 C260 50 220 120 160 80 C110 40 50 110 10 70 Z" fill="url(#auroraGrad2)" filter="url(#auroraBlur)" opacity="0.65"/>
+  <path d="M40 110 Q100 50 160 105 T280 85" stroke="#a7f3d0" stroke-width="2.5" opacity="0.85" filter="url(#auroraBlur)"/>
+
+  <!-- Constellation stars over aurora -->
+  <g fill="#ffffff">
+    <circle cx="70" cy="65" r="1.8"/>
+    <circle cx="120" cy="45" r="2.2"/>
+    <circle cx="165" cy="70" r="1.5"/>
+    <circle cx="210" cy="40" r="2.5"/>
+    <circle cx="260" cy="60" r="1.8"/>
+    <circle cx="190" cy="145" r="1.5"/>
+  </g>
+  <path d="M70 65 L120 45 L165 70 L210 40 L260 60" stroke="#fbcfe8" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.7"/>
+
+  <!-- Sparkle diamond -->
+  <path d="M210 40 L212 33 L217 31 L212 29 L210 22 L208 29 L203 31 L208 33 Z" fill="#ffffff" opacity="0.95"/>
+</svg>

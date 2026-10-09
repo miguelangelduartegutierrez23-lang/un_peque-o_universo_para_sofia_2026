@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="visorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+  <!-- Helmet -->
+  <circle cx="50" cy="38" r="18" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.8"/>
+  <!-- Visor reflective shield -->
+  <path d="M40 34 C40 28 60 28 60 34 C60 44 40 44 40 34 Z" fill="url(#visorGrad)" stroke="#64748b" stroke-width="1.2"/>
+  <ellipse cx="44" cy="33" rx="2" ry="1.2" fill="#ffffff" opacity="0.8"/>
+  <!-- Torso & Backpack -->
+  <rect x="36" y="52" width="28" height="26" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.8"/>
+  <rect x="31" y="55" width="5" height="20" rx="2" fill="#cbd5e1"/>
+  <rect x="64" y="55" width="5" height="20" rx="2" fill="#cbd5e1"/>
+  <!-- Chest panel indicators -->
+  <circle cx="44" cy="62" r="1.8" fill="#38bdf8"/>
+  <circle cx="50" cy="62" r="1.8" fill="#ef4444"/>
+  <line x1="44" y1="68" x2="56" y2="68" stroke="#64748b" stroke-width="1.5"/>
+  <!-- Floating tether cable -->
+  <path d="M50 78 Q58 88 50 94" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="3 3"/>
+</svg>

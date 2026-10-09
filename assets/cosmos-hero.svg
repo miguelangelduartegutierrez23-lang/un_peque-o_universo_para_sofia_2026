@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<defs>
+ <radialGradient id="bg"><stop stop-color="#211044"/><stop offset=".55" stop-color="#100b2b"/><stop offset="1" stop-color="#050510"/></radialGradient>
+ <radialGradient id="planet" cx="30%" cy="25%"><stop stop-color="#e4cfff"/><stop offset=".2" stop-color="#a77af1"/><stop offset=".58" stop-color="#6334a9"/><stop offset="1" stop-color="#170f32"/></radialGradient>
+ <linearGradient id="haze" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5e2ca5" stop-opacity="0"/><stop offset=".55" stop-color="#8e49dc" stop-opacity=".42"/><stop offset="1" stop-color="#0f1238" stop-opacity="0"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#bg)"/>
+<ellipse cx="370" cy="270" rx="520" ry="150" fill="#4d1e83" opacity=".25" filter="url(#glow)" transform="rotate(-30 370 270)"/>
+<ellipse cx="1260" cy="350" rx="490" ry="190" fill="#50209d" opacity=".25" filter="url(#glow)" transform="rotate(35 1260 350)"/>
+<path d="M0 650 Q330 500 600 670 T1100 650 T1600 590 V900 H0Z" fill="url(#haze)"/>
+<g fill="#fff">
+<circle cx="100" cy="100" r="2"/><circle cx="190" cy="250" r="1.5"/><circle cx="360" cy="80" r="2"/><circle cx="500" cy="330" r="1.6"/><circle cx="720" cy="160" r="2"/><circle cx="900" cy="70" r="1.6"/><circle cx="1080" cy="230" r="2"/><circle cx="1280" cy="110" r="1.5"/><circle cx="1460" cy="250" r="2"/><circle cx="1530" cy="90" r="1.5"/><circle cx="240" cy="460" r="1.5"/><circle cx="630" cy="450" r="1.4"/><circle cx="900" cy="380" r="1.7"/><circle cx="1130" cy="470" r="1.6"/><circle cx="1380" cy="400" r="1.5"/>
+</g>
+<g stroke="#c6a5ff" stroke-width="1.2" opacity=".65" fill="none"><path d="M100 100 L190 250 L360 80 L500 330"/><path d="M900 70 L1080 230 L1280 110 L1460 250"/><path d="M900 380 L1130 470 L1380 400"/></g>
+<g stroke="#f5dfff" stroke-width="2" opacity=".85"><path d="M100 86 V114 M86 100 H114"/><path d="M1080 214 V246 M1064 230 H1096"/><path d="M1460 236 V264 M1446 250 H1474"/></g>
+<circle cx="1210" cy="560" r="145" fill="url(#planet)"/>
+<ellipse cx="1210" cy="560" rx="205" ry="55" fill="none" stroke="#c4a0ff" stroke-width="3" opacity=".65" transform="rotate(-18 1210 560)"/>
+<ellipse cx="1210" cy="560" rx="240" ry="74" fill="none" stroke="#7b5ec4" stroke-width="1.5" opacity=".5" transform="rotate(-18 1210 560)"/>
+<circle cx="1165" cy="510" r="30" fill="#fff" opacity=".12" filter="url(#glow)"/>
+<path d="M0 780 Q220 680 410 770 T790 760 T1180 790 T1600 720 V900 H0Z" fill="#070711"/>
+<path d="M0 825 Q230 760 450 835 T880 810 T1300 840 T1600 800" fill="none" stroke="#7644b5" stroke-width="2" opacity=".5"/>
+</svg>

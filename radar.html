@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090715">
+  <title>Radar Orbital ✦ Panel Secreto de Visitas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090715;
+      --card-bg: rgba(22, 16, 46, 0.7);
+      --card-border: rgba(167, 139, 250, 0.2);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #a78bfa;
+      --pink: #f472b6;
+      --cyan: #38bdf8;
+      --green: #4ade80;
+      --red: #f87171;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: radial-gradient(circle at 50% 0%, #1e1338 0%, #090715 65%, #05040a 100%);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 30px 20px 60px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      font-size: 24px;
+      color: var(--accent);
+      animation: pulse 2s infinite alternate;
+    }
+    .brand h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+    .brand p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      background: rgba(167, 139, 250, 0.15);
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    button:hover {
+      background: rgba(167, 139, 250, 0.3);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .btn-danger {
+      background: rgba(248, 113, 113, 0.15);
+      border-color: rgba(248, 113, 113, 0.3);
+      color: #fca5a5;
+    }
+    .btn-danger:hover {
+      background: rgba(248, 113, 113, 0.25);
+      border-color: var(--red);
+    }
+
+    /* STATUS BANNER */
+    .status-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .status-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .status-dot-wrap {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--muted);
+      transition: background 0.3s;
+    }
+    .status-dot.active {
+      background: var(--green);
+      box-shadow: 0 0 16px var(--green);
+    }
+    .status-dot.active::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--green);
+      animation: ripple 1.8s infinite;
+    }
+    .status-text h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .status-text p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* METRICS GRID */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--pink));
+      opacity: 0.7;
+    }
+    .metric-label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .metric-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .metric-sub {
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    /* FEED SECTION */
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .badge-count {
+      background: rgba(167, 139, 250, 0.2);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    .logs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .log-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      transition: border-color 0.2s ease;
+    }
+    .log-item:hover {
+      border-color: rgba(167, 139, 250, 0.5);
+    }
+    .log-item.letter-opened {
+      border-color: rgba(244, 114, 182, 0.6);
+      background: rgba(35, 18, 54, 0.7);
+    }
+    .log-main {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .log-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(167, 139, 250, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .log-item.letter-opened .log-icon {
+      background: rgba(244, 114, 182, 0.2);
+    }
+    .log-time {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+    .log-date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .log-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .pill.pill-device {
+      color: var(--cyan);
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.1);
+    }
+    .pill.pill-letter {
+      color: var(--pink);
+      border-color: rgba(244, 114, 182, 0.4);
+      background: rgba(244, 114, 182, 0.15);
+      font-weight: 600;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      background: var(--card-bg);
+      border: 1px dashed var(--card-border);
+      border-radius: 18px;
+      color: var(--muted);
+    }
+    .empty-state span {
+      font-size: 40px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    /* CONFIG MODAL */
+    .config-box {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(15, 10, 30, 0.6);
+      border: 1px solid rgba(167, 139, 250, 0.15);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .config-box strong {
+      color: var(--accent);
+    }
+    .config-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 12px;
+      margin: 10px 0;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); opacity: 0.8; }
+      to { transform: scale(1.15); opacity: 1; }
+    }
+    @keyframes ripple {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <span class="brand-icon">🪐</span>
+        <div>
+          <h1>Radar Orbital Secreto</h1>
+          <p>Telemetría y registro de visitas a «Un pequeño universo»</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btnRefresh" title="Actualizar datos">🔄 Actualizar</button>
+        <button id="btnClear" class="btn-danger" title="Borrar historial">🗑️ Limpiar historial</button>
+      </div>
+    </header>
+
+    <!-- LIVE STATUS CARD -->
+    <div class="status-card">
+      <div class="status-info">
+        <div class="status-dot-wrap">
+          <div class="status-dot" id="liveDot"></div>
+        </div>
+        <div class="status-text">
+          <h2 id="liveTitle">Consultando órbita...</h2>
+          <p id="liveSubtitle">Calculando última señal estelar recibida</p>
+        </div>
+      </div>
+      <div class="status-actions">
+        <span class="pill" id="liveDevicePill">Sin señal</span>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Total de Visitas</div>
+        <div class="metric-value" id="metricTotal">0</div>
+        <div class="metric-sub" id="metricTotalSub">Desde inicio</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Último Acceso</div>
+        <div class="metric-value" id="metricLastTime">--:--</div>
+        <div class="metric-sub" id="metricLastDate">Sin registros</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Carta Secreta</div>
+        <div class="metric-value" id="metricLetter">No</div>
+        <div class="metric-sub" id="metricLetterSub">Pendiente de abrir</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Dispositivo Frecuente</div>
+        <div class="metric-value" id="metricDevice">--</div>
+        <div class="metric-sub" id="metricDeviceSub">Detectando</div>
+      </div>
+    </div>
+
+    <!-- VISIT HISTORY -->
+    <div class="section-title">
+      <span>Registro Cronológico de Visitas</span>
+      <span class="badge-count" id="badgeCount">0 accesos</span>
+    </div>
+
+    <div class="logs-list" id="logsList">
+      <div class="empty-state">
+        <span>✨</span>
+        <p>Aún no hay visitas registradas.</p>
+        <small style="display:block; margin-top: 6px;">En cuanto se abra la página principal, aparecerá aquí al instante.</small>
+      </div>
+    </div>
+
+    <!-- REMOTE SYNC CONFIG (OPTIONAL) -->
+    <div class="config-box">
+      <p>💡 <strong>¿Cómo funciona este radar?</strong></p>
+      <p>• <strong>Modo Automático:</strong> Registra las visitas en tiempo real cuando se prueba localmente en este computador o si compartes el almacenamiento.</p>
+      <p>• <strong>Para recibir visitas remotas (cuando Sofi lo abra desde su casa):</strong> Puedes vincular un endpoint gratuito de base de datos en tiempo real (como Firebase Realtime Database o RestDB).</p>
+      <input type="text" id="remoteDbUrl" class="config-input" placeholder="URL remota opcional (ej: https://mi-proyecto.firebaseio.com/visitas.json)">
+      <button id="btnSaveConfig" style="font-size: 12px; padding: 6px 14px;">💾 Guardar URL remota</button>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "sofi_universe_telemetry_v1";
+    const CONFIG_KEY = "sofi_universe_radar_config";
+
+    const elements = {
+      liveDot: document.getElementById("liveDot"),
+      liveTitle: document.getElementById("liveTitle"),
+      liveSubtitle: document.getElementById("liveSubtitle"),
+      liveDevicePill: document.getElementById("liveDevicePill"),
+      metricTotal: document.getElementById("metricTotal"),
+      metricLastTime: document.getElementById("metricLastTime"),
+      metricLastDate: document.getElementById("metricLastDate"),
+      metricLetter: document.getElementById("metricLetter"),
+      metricLetterSub: document.getElementById("metricLetterSub"),
+      metricDevice: document.getElementById("metricDevice"),
+      metricDeviceSub: document.getElementById("metricDeviceSub"),
+      badgeCount: document.getElementById("badgeCount"),
+      logsList: document.getElementById("logsList"),
+      btnRefresh: document.getElementById("btnRefresh"),
+      btnClear: document.getElementById("btnClear"),
+      remoteDbUrl: document.getElementById("remoteDbUrl"),
+      btnSaveConfig: document.getElementById("btnSaveConfig")
+    };
+
+    // Load saved remote config URL if any
+    const savedConfig = localStorage.getItem(CONFIG_KEY);
+    if (savedConfig) {
+      elements.remoteDbUrl.value = savedConfig;
+    }
+
+    elements.btnSaveConfig.addEventListener("click", () => {
+      const url = elements.remoteDbUrl.value.trim();
+      localStorage.setItem(CONFIG_KEY, url);
+      alert("✅ Configuración guardada. El radar consultará esta fuente.");
+      loadData();
+    });
+
+    async function fetchRemoteLogs(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) return [];
+        const data = await res.json();
+        if (!data) return [];
+        // Firebase returns an object of objects
+        if (typeof data === "object" && !Array.isArray(data)) {
+          return Object.values(data);
+        }
+        return Array.isArray(data) ? data : [];
+      } catch (err) {
+        console.warn("Error fetching remote logs:", err);
+        return [];
+      }
+    }
+
+    async function loadData() {
+      let localLogs = [];
+      try {
+        localLogs = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      } catch (e) {
+        localLogs = [];
+      }
+
+      const remoteUrl = elements.remoteDbUrl.value.trim();
+      let remoteLogs = [];
+      if (remoteUrl) {
+        remoteLogs = await fetchRemoteLogs(remoteUrl);
+      }
+
+      // Merge and deduplicate by timestamp + sessionId
+      const allLogsMap = new Map();
+      [...localLogs, ...remoteLogs].forEach(log => {
+        const id = log.id || (log.timestamp + "_" + (log.device || ""));
+        allLogsMap.set(id, log);
+      });
+
+      const logs = Array.from(allLogsMap.values());
+      // Sort newest first
+      logs.sort((a, b) => (new Date(b.timestamp).getTime()) - (new Date(a.timestamp).getTime()));
+
+      renderDashboard(logs);
+    }
+
+    function renderDashboard(logs) {
+      const count = logs.length;
+      elements.metricTotal.textContent = count;
+      elements.badgeCount.textContent = `${count} ${count === 1 ? 'acceso' : 'accesos'}`;
+
+      if (count === 0) {
+        elements.liveDot.classList.remove("active");
+        elements.liveTitle.textContent = "Sin actividad detectada";
+        elements.liveSubtitle.textContent = "Esperando que se abra la página por primera vez";
+        elements.liveDevicePill.textContent = "Desconectado";
+        elements.metricLastTime.textContent = "--:--";
+        elements.metricLastDate.textContent = "Sin registros";
+        elements.metricLetter.textContent = "No";
+        elements.metricLetterSub.textContent = "Pendiente";
+        elements.metricDevice.textContent = "--";
+        elements.metricDeviceSub.textContent = "Sin datos";
+        elements.logsList.innerHTML = `
+          <div class="empty-state">
+            <span>✨</span>
+            <p>Aún no hay visitas registradas.</p>
+            <small style="display:block; margin-top: 6px;">En cuanto se abra la página principal, aparecerá aquí al instante.</small>
+          </div>
+        `;
+        return;
+      }
+
+      const latest = logs[0];
+      const latestDate = new Date(latest.timestamp);
+      const now = new Date();
+      const diffMinutes = Math.floor((now.getTime() - latestDate.getTime()) / 60000);
+
+      // Live status: active if within last 4 minutes
+      const isActiveNow = diffMinutes <= 4;
+      if (isActiveNow) {
+        elements.liveDot.classList.add("active");
+        elements.liveTitle.textContent = "🟢 ¡En línea ahora mismo!";
+        elements.liveSubtitle.textContent = `La página está abierta en este momento (${diffMinutes === 0 ? 'hace unos segundos' : `hace ${diffMinutes} min`})`;
+        elements.liveDevicePill.textContent = latest.device || "Conectado";
+        elements.liveDevicePill.style.borderColor = "var(--green)";
+        elements.liveDevicePill.style.color = "var(--green)";
+      } else {
+        elements.liveDot.classList.remove("active");
+        elements.liveTitle.textContent = "Desconectada actualmente";
+        elements.liveSubtitle.textContent = `Última vez vista: hace ${formatRelativeTime(diffMinutes)}`;
+        elements.liveDevicePill.textContent = latest.device || "Inactivo";
+        elements.liveDevicePill.style.borderColor = "rgba(255,255,255,0.1)";
+        elements.liveDevicePill.style.color = "var(--muted)";
+      }
+
+      // Last visit metrics
+      elements.metricLastTime.textContent = formatTimeOnly(latestDate);
+      elements.metricLastDate.textContent = formatDateOnly(latestDate);
+
+      // Letter opened check across all visits
+      const hasOpenedLetter = logs.some(l => l.letterOpened || l.action === "letter_opened");
+      if (hasOpenedLetter) {
+        elements.metricLetter.textContent = "¡Sí! 💌";
+        elements.metricLetter.style.color = "var(--pink)";
+        elements.metricLetterSub.textContent = "Carta descubierta";
+      } else {
+        elements.metricLetter.textContent = "No aún";
+        elements.metricLetter.style.color = "#fff";
+        elements.metricLetterSub.textContent = "No ha abierto la carta";
+      }
+
+      // Device stats
+      const devices = logs.map(l => l.device || "PC");
+      const mobileCount = devices.filter(d => d.includes("Móvil") || d.includes("Celular") || d.includes("iPhone") || d.includes("Android")).length;
+      if (mobileCount >= count / 2) {
+        elements.metricDevice.textContent = "Celular 📱";
+        elements.metricDeviceSub.textContent = `${mobileCount} de ${count} visitas`;
+      } else {
+        elements.metricDevice.textContent = "Computador 💻";
+        elements.metricDeviceSub.textContent = `${count - mobileCount} de ${count} visitas`;
+      }
+
+      // Render logs list
+      elements.logsList.innerHTML = logs.map(log => {
+        const d = new Date(log.timestamp);
+        const isLetter = log.letterOpened || log.action === "letter_opened";
+        const icon = isLetter ? "💌" : (log.device?.includes("Móvil") ? "📱" : "💻");
+        const actionLabel = getActionDescription(log);
+
+        return `
+          <div class="log-item ${isLetter ? 'letter-opened' : ''}">
+            <div class="log-main">
+              <div class="log-icon">${icon}</div>
+              <div>
+                <div class="log-time">${formatTimeOnly(d)} · ${formatDateOnly(d)}</div>
+                <div class="log-date">${actionLabel}</div>
+              </div>
+            </div>
+            <div class="log-meta">
+              <span class="pill pill-device">${log.device || "Dispositivo"}</span>
+              ${log.browser ? `<span class="pill">${log.browser}</span>` : ""}
+              ${isLetter ? `<span class="pill pill-letter">✦ CARTA ABIERTA</span>` : ""}
+              ${log.musicPlayed ? `<span class="pill">🎵 Música escuchada</span>` : ""}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function formatTimeOnly(d) {
+      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function formatDateOnly(d) {
+      return d.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' });
+    }
+
+    function formatRelativeTime(mins) {
+      if (mins < 60) return `${mins} min`;
+      const hours = Math.floor(mins / 60);
+      if (hours < 24) return `${hours} h`;
+      const days = Math.floor(hours / 24);
+      return `${days} ${days === 1 ? 'día' : 'días'}`;
+    }
+
+    function getActionDescription(log) {
+      if (log.action === "letter_opened" || log.letterOpened) {
+        return "Abrió y leyó la carta del telescopio secreto ✦";
+      }
+      if (log.action === "dramatic_buddy") {
+        return "Activó el show dramático del planeta Órbita-7 🪐";
+      }
+      if (log.action === "music_played") {
+        return "Sintonizó la música espacial 🎵";
+      }
+      return "Accedió a la expedición y recorrió el cosmos";
+    }
+
+    elements.btnRefresh.addEventListener("click", () => {
+      loadData();
+    });
+
+    elements.btnClear.addEventListener("click", () => {
+      if (confirm("¿Estás seguro de que deseas limpiar el historial de visitas local?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        loadData();
+      }
+    });
+
+    // Real-time broadcast channel across open tabs in same browser
+    try {
+      const channel = new BroadcastChannel("sofi_universe_telemetry_channel");
+      channel.onmessage = (msg) => {
+        loadData();
+      };
+    } catch (e) {}
+
+    // Auto-refresh every 8 seconds
+    setInterval(loadData, 8000);
+    loadData();
+  </script>
+</body>
+</html>

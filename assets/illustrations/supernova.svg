@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <radialGradient id="snGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="35%" stop-color="#fef08a"/>
+      <stop offset="70%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#7c2d12" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="snGlow"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <circle cx="50" cy="50" r="30" fill="url(#snGrad)" filter="url(#snGlow)"/>
+  <path d="M50 12 L53 38 L78 22 L62 47 L88 50 L62 53 L78 78 L53 62 L50 88 L47 62 L22 78 L38 53 L12 50 L38 47 L22 22 L47 38 Z" fill="#fef08a"/>
+  <circle cx="50" cy="50" r="8" fill="#ffffff"/>
+</svg>
